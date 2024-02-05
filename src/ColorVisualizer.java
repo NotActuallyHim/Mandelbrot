@@ -28,7 +28,7 @@ public class ColorVisualizer extends JPanel {
         double testVal = 0;
         for (int x = 0; x < GRAPH_WIDTH; x++) {
             testVal += stepSize;
-            Color c = mapColor((int) testVal);
+            Color c = Palette.MapColor(testVal);
             g.setColor(c);
             g.fillRect(x + LEFT_MARGIN, 300, 1, 50);
             g.setColor(Color.red);
@@ -38,14 +38,5 @@ public class ColorVisualizer extends JPanel {
             g.setColor(Color.green);
             g.fillRect(x + LEFT_MARGIN, 300 - c.getGreen(), 1, 1);
         }
-    }
-
-    private Color mapColor(int n) {
-        // These functions work, but do not meet the requirements becuase
-        // they will cause errors when the ITERATION_LIMIT increases
-        int red = n / 2;
-        int green = 255 - n / 2;
-        int blue = (int) Math.sqrt(n) * 10;
-        return new Color(red, green, blue);
     }
 }
