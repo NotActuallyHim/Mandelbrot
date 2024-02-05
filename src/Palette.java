@@ -12,23 +12,19 @@ public class Palette {
     }
 
     public static Color MapColor(double value) {
-        double ratio;
-        if (value == -1) {
-            return Color.BLACK;
-        } else {
-            ratio = normalize(value);
-        }
         if (Palette.getScheme() == 1) {
-            return Scheme1(ratio);
+            return Scheme1(value);
         }
-        return Color.PINK;
+        return Scheme1(value);
     }
 
     private static double normalize(double value) {
         return value / Mandelbrot.getLimit();
     }
 
-    private static Color Scheme1(double ratio){
+    private static Color Scheme1(double value){
+        if(value < 0) return Color.BLACK;
+        double ratio = normalize(value);
         Color orange = Color.ORANGE;
         Color blue = Color.BLUE;
         int r = (int)(orange.getRed() * (1 - ratio) + blue.getRed()*ratio);
