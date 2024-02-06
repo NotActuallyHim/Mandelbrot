@@ -17,7 +17,7 @@ public class ColorVisualizer extends JPanel {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
+        Palette q = new Palette();
         g.setColor(Color.white);
         g.drawString("0", 48, 365);
         g.drawString("" + ITERATION_LIMIT, GRAPH_WIDTH + LEFT_MARGIN, 365);
@@ -28,7 +28,7 @@ public class ColorVisualizer extends JPanel {
         double testVal = 0;
         for (int x = 0; x < GRAPH_WIDTH; x++) {
             testVal += stepSize;
-            Color c = Palette.MapColor(testVal);
+            Color c = q.MapColor(testVal);
             g.setColor(c);
             g.fillRect(x + LEFT_MARGIN, 300, 1, 50);
             g.setColor(Color.red);

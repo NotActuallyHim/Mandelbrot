@@ -1,24 +1,24 @@
 import java.awt.Color;
 
 public class Palette {
-    private static int colorScheme = 4;
+    private int colorScheme = 4;
 
-    public static int getScheme() {
-        return Palette.colorScheme;
+    public int getScheme() {
+        return this.colorScheme;
     }
 
-    public static void setScheme(int num) {
-        Palette.colorScheme = num;
+    public void setScheme(int num) {
+        this.colorScheme = num;
     }
 
-    public static Color MapColor(double value) {
-        if (Palette.getScheme() == 1) {
+    public Color MapColor(double value) {
+        if (this.getScheme() == 1) {
             return Scheme1(value);
-        } else if (Palette.getScheme() == 2) {
+        } else if (this.getScheme() == 2) {
             return Scheme2(value);
-        } else if (Palette.getScheme() == 3) {
+        } else if (this.getScheme() == 3) {
             return Scheme3(value);
-        } else if (Palette.getScheme() == 4) {
+        } else if (this.getScheme() == 4) {
             return Scheme4(value);
         }
         return Scheme1(value); // Default to Scheme1
