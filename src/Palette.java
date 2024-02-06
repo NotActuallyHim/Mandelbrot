@@ -62,9 +62,9 @@ public class Palette {
         if (value < 0)
             return Color.BLACK;
         double ratio = normalize(value);
-        int r = (int) Math.min(255, Math.max(0, 255 * ratio));
-        int g = (int) Math.min(255, Math.max(0, 255 * Math.sin(ratio * Math.PI / 2)));
-        int b = 0;
+        int r = (int) Math.min(255, Math.max(50, 255 * ratio));
+        int g = 20;
+        int b = (int) Math.min(255, Math.max(50, 255 * Math.sin(ratio * Math.PI / 2)));;
         return new Color(r, g, b);
     }
 }
