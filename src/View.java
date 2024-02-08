@@ -19,8 +19,22 @@ public class View {
     }
 
     public void setComplexCorners(Complex topLeft, Complex botRight) {
-        xSlope = (botRight.getReal() - topLeft.getReal()) / screenWidth;
-        ySlope = (topLeft.getImaginary() - botRight.getImaginary()) / screenHeight; // Invert y-axis to match standard complex plane
+        double xRange = botRight.getReal() - topLeft.getReal();
+        double yRange = topLeft.getImaginary() - botRight.getImaginary(); // Invert y-axis to match standard complex plane
+
+        double currentAspectRatio = (double) screenWidth / screenHeight;
+        double desiredAspectRatio = xRange / yRange;
+
+        if (desiredAspectRatio > currentAspectRatio) {
+            // Adjust width to maintain aspect ratio
+            xRange = yRange * currentAspectRatio;
+        } else {
+            // Adjust height to maintain aspect ratio
+            yRange = xRange / currentAspectRatio;
+        }
+
+        xSlope = xRange / screenWidth;
+        ySlope = yRange / screenHeight;
         xOffset = topLeft.getReal();
         yOffset = topLeft.getImaginary();
     }

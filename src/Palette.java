@@ -12,16 +12,18 @@ public class Palette {
     }
 
     public Color MapColor(int value) {
-        if (this.getScheme() == 1) {
-            return Scheme1(value);
-        } else if (this.getScheme() == 2) {
-            return Scheme2(value);
-        } else if (this.getScheme() == 3) {
-            return Scheme3(value);
-        } else if (this.getScheme() == 4) {
-            return Scheme4(value);
+        switch (this.getScheme()) {
+            case 1:
+                return Scheme1(value);
+            case 2:
+                return Scheme2(value);
+            case 3:
+                return Scheme3(value);
+            case 4:
+                return Scheme4(value);
+            default:
+                return Scheme1(value); // Default to Scheme1
         }
-        return Scheme1(value); // Default to Scheme1
     }
 
     private static double normalize(double value) {
@@ -65,7 +67,6 @@ public class Palette {
         int r = (int) Math.min(255, Math.max(50, 255 * ratio));
         int g = 20;
         int b = (int) Math.min(255, Math.max(50, 255 * Math.sin(ratio * Math.PI / 2)));
-        ;
         return new Color(r, g, b);
     }
 }

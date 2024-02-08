@@ -13,7 +13,7 @@ public class Mandelbrot {
 
     public static int testPoint(Complex c) {
         Complex z = new Complex();
-        int iteration = 0; // Start from 0 iterations
+        int iteration = 0;
 
         while (iteration < iterationLimit) {
             z = z.square().add(c);

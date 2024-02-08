@@ -7,26 +7,34 @@ import java.awt.event.MouseListener;
 import MathObjects.Complex;
 
 public class FractalPanel extends JPanel implements KeyListener, MouseListener {
-    int width = 1000;
-    int height = 800;
-    int iterationLimit = 1000;
-    int colorScheme = 0;
-    int zoomScale = 10;
-    View view = new View(width, height);
-    Palette colors = new Palette();
+    private static final int WIDTH = 1000;
+    private static final int HEIGHT = 800;
+    private static final int DEFAULT_ITERATION_LIMIT = 1000;
+    
+    private View view;
+    private Palette colors;
+    private Complex topLeft, bottomRight;
+    private int colorScheme = 0;
+    private int iterationLimit = DEFAULT_ITERATION_LIMIT;
 
     public FractalPanel() {
-        setPreferredSize(new Dimension(width, height));
+        setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setBackground(Color.BLACK);
-        Mandelbrot.setLimit(iterationLimit);
-        colors.setScheme(colorScheme);
         addKeyListener(this);
         addMouseListener(this);
+        
+        view = new View(WIDTH, HEIGHT);
+        colors = new Palette();
     }
 
-    public void paintComponent(Graphics g) {
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        colors.setScheme(colorScheme);
+        Mandelbrot.setLimit(iterationLimit);
+        
+        for (int y = 0; y < HEIGHT; y++) {
+            for (int x = 0; x < WIDTH; x++) {
                 g.setColor(colors.MapColor(Mandelbrot.testPoint(view.translate(x, y))));
                 g.fillRect(x, y, 1, 1);
             }
@@ -34,45 +42,48 @@ public class FractalPanel extends JPanel implements KeyListener, MouseListener {
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
-        // Calculate the new complex corners based on the click position and zoom scale
-        Complex topLeft = view.translate(e.getX() - width / (2 * zoomScale), e.getY() - height / (2 * zoomScale));
-        Complex bottomRight = view.translate(e.getX() + width / (2 * zoomScale), e.getY() + height / (2 * zoomScale));
-        
-        // Set the new complex corners
+    public void mousePressed(MouseEvent e) {
+        topLeft = view.translate(e.getX(), e.getY());
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        bottomRight = view.translate(e.getX(), e.getY());
         view.setComplexCorners(topLeft, bottomRight);
-        
-        // Update the iteration limit based on the zoom scale
-        iterationLimit *= zoomScale*zoomScale;
-        
-        // Repaint the panel
+        iterationLimit *= 2; // Double the iteration limit
         repaint();
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {}
-
-    @Override
-    public void mouseReleased(MouseEvent e) {}
-
-    @Override
-    public void mouseEntered(MouseEvent e) {}
-
-    @Override
-    public void mouseExited(MouseEvent e) {}
-
-    @Override
-    public void keyTyped(KeyEvent e) {}
-
-    @Override
     public void keyPressed(KeyEvent e) {
-        if(e.getKeyCode() == KeyEvent.VK_P){
-            colorScheme ++;
-            colorScheme %= 5;
+        switch (e.getKeyCode()){
+            case KeyEvent.VK_1: colorScheme = 1; break;
+            case KeyEvent.VK_2: colorScheme = 2; break;
+            case KeyEvent.VK_3: colorScheme = 3; break;
+            case KeyEvent.VK_4: colorScheme = 4; break;
         }
         repaint();
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {}
+    public void mouseClicked(MouseEvent e) {
+    
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+    }
 }
