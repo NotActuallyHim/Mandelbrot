@@ -11,7 +11,7 @@ public class Palette {
         this.colorScheme = num;
     }
 
-    public Color MapColor(double value) {
+    public Color MapColor(int value) {
         if (this.getScheme() == 1) {
             return Scheme1(value);
         } else if (this.getScheme() == 2) {
@@ -64,7 +64,8 @@ public class Palette {
         double ratio = normalize(value);
         int r = (int) Math.min(255, Math.max(50, 255 * ratio));
         int g = 20;
-        int b = (int) Math.min(255, Math.max(50, 255 * Math.sin(ratio * Math.PI / 2)));;
+        int b = (int) Math.min(255, Math.max(50, 255 * Math.sin(ratio * Math.PI / 2)));
+        ;
         return new Color(r, g, b);
     }
 }
