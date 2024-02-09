@@ -1,9 +1,7 @@
 import MathObjects.Complex;
 
 public class View {
-
     private int screenWidth, screenHeight;
-
     private double xSlope, xOffset, ySlope, yOffset;
 
     public View(int w, int h) {
@@ -14,22 +12,20 @@ public class View {
 
     public Complex translate(int x, int y) {
         double real = xSlope * x + xOffset;
-        double imag = yOffset - ySlope * y; // Invert y-axis to match standard complex plane
+        double imag = yOffset - ySlope * y; 
         return new Complex(real, imag);
     }
 
     public void setComplexCorners(Complex topLeft, Complex botRight) {
         double xRange = botRight.getReal() - topLeft.getReal();
-        double yRange = topLeft.getImaginary() - botRight.getImaginary(); // Invert y-axis to match standard complex plane
+        double yRange = topLeft.getImaginary() - botRight.getImaginary(); 
 
         double currentAspectRatio = (double) screenWidth / screenHeight;
         double desiredAspectRatio = xRange / yRange;
 
         if (desiredAspectRatio > currentAspectRatio) {
-            // Adjust width to maintain aspect ratio
             xRange = yRange * currentAspectRatio;
         } else {
-            // Adjust height to maintain aspect ratio
             yRange = xRange / currentAspectRatio;
         }
 

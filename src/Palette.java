@@ -11,7 +11,7 @@ public class Palette {
         this.colorScheme = num;
     }
 
-    public Color MapColor(int value) {
+    public Color mapColor(int value) {
         switch (this.getScheme()) {
             case 1:
                 return Scheme1(value);
