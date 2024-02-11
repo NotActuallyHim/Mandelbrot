@@ -1,5 +1,4 @@
 import java.awt.*;
-import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -7,6 +6,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import MathObjects.Complex;
 
 public class FractalPanel extends JPanel implements KeyListener, MouseListener {
@@ -97,25 +97,20 @@ public class FractalPanel extends JPanel implements KeyListener, MouseListener {
         }
     }
 
+    // Unused MouseListener methods
     @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
+    public void mouseClicked(MouseEvent e) {}
 
     @Override
-    public void mouseExited(MouseEvent e) {
-    }
+    public void mouseEntered(MouseEvent e) {}
 
     @Override
-    public void keyTyped(KeyEvent e) {
-    }
+    public void mouseExited(MouseEvent e) {}
+
+    // Unused KeyListener methods
+    @Override
+    public void keyTyped(KeyEvent e) {}
 
     @Override
-    public void keyReleased(KeyEvent e) {
-    }
+    public void keyReleased(KeyEvent e) {}
 }
